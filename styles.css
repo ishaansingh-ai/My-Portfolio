@@ -724,9 +724,13 @@ header {
     line-height: .9;
     text-transform: uppercase;
     letter-spacing: -.04em;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     width: 100%;
     text-align: left;
+    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .projects-grid {
@@ -779,16 +783,17 @@ header {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 1.5rem;
-    background: linear-gradient(transparent, rgba(0, 0, 0, .85));
-    z-index: 2
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, .95), rgba(0, 0, 0, .5), transparent);
+    z-index: 2;
 }
 
 .project-title {
     font-family: 'Archivo Black', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     text-transform: uppercase;
-    margin-bottom: .25rem
+    margin-bottom: .35rem;
+    letter-spacing: -.02em;
 }
 
 .project-category {
@@ -800,11 +805,11 @@ header {
 }
 
 .project-desc {
-    font-size: .85rem;
-    color: rgba(255, 255, 255, .5);
-    margin-top: .5rem;
-    line-height: 1.5;
-    font-weight: 300
+    font-size: .9rem;
+    color: rgba(255, 255, 255, .6);
+    margin-top: .75rem;
+    line-height: 1.6;
+    font-weight: 300;
 }
 
 .project-placeholder {
@@ -941,22 +946,23 @@ header {
 .experience-link {
     display: inline-flex;
     align-items: center;
-    gap: .5rem;
+    gap: .8rem;
     color: var(--orange);
     text-decoration: none;
     font-family: 'Space Mono', monospace;
     font-size: 11px;
     letter-spacing: .1em;
     text-transform: uppercase;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     padding-bottom: 2px;
-    border-bottom: 1px solid var(--orange);
-    transition: all .3s
+    border-bottom: 2px solid var(--orange);
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .experience-link:hover {
-    gap: 1rem;
-    border-bottom-width: 2px
+    gap: 1.2rem;
+    border-bottom-width: 2px;
+    transform: translateX(4px);
 }
 
 /* Education */
@@ -1005,11 +1011,11 @@ header {
 .edu-institution {
     color: var(--orange);
     font-family: 'Space Mono', monospace;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: .1em;
     text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: 2rem
+    margin-bottom: 2.5rem;
 }
 
 .edu-details {
@@ -1196,6 +1202,12 @@ header {
 
 .footer-text {
     font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .15em;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    margin-top: 3rem;
+}
     font-size: 9px;
     letter-spacing: .3em;
     color: var(--muted);
