@@ -15,6 +15,7 @@
 
 <body>
     <div class="cursor"></div>
+    <div class="cursor-reveal"></div>
     <div class="grain"></div>
     <div class="light-leak leak-1"></div>
     <div class="light-leak leak-2"></div>
@@ -41,9 +42,9 @@
     </header>
 
     <!-- Pill Nav -->
-    <nav class="nav-pill">
+    <nav class="nav-pill magnetic">
         <div class="nav-indicator"></div>
-        <a href="#" class="active" onclick="goToSection(0);return false">Home</a>
+        <a href="#" class="active magnetic" onclick="goToSection(0);return false">Home</a>
         <a href="#" onclick="goToSection(1);return false">About</a>
         <a href="#" onclick="goToSection(2);return false">Work</a>
         <a href="#" onclick="goToSection(3);return false">Exp</a>
@@ -76,10 +77,17 @@
         <section class="section active" id="section-0">
             <div class="hero-content">
                 <div class="hero-tag reveal-up">Game Developer & Engineer</div>
-                <h1 class="hero-title reveal-up">ISHAAN<br><span class="hero-title-outline">SINGH</span></h1>
+                <h1 class="hero-title reveal-up">
+                    <span class="mask-line"><span class="hero-title-solid">ISHAAN</span></span>
+                    <span class="mask-line"><span class="hero-title-outline">SINGH</span></span>
+                </h1>
                 <div class="hero-divider"></div>
                 <div class="hero-meta">
                     <div class="hero-meta-item">Based in Andhra Pradesh, India</div>
+                    <div class="hero-meta-item right">Mechanical Engineering<br>× Creative Technology</div>
+                </div>
+                <div class="hero-availability reveal-up">✦ Available for Opportunities</div>
+                <div class="scroll-indicator-container reveal-up">
                     <div class="scroll-indicator">
                         <svg viewBox="0 0 144 144">
                             <defs>
@@ -91,9 +99,7 @@
                         </svg>
                         <span class="arrow">↓</span>
                     </div>
-                    <div class="hero-meta-item right">Mechanical Engineering<br>× Creative Technology</div>
                 </div>
-                <div class="hero-availability reveal-up">✦ Available for Opportunities</div>
             </div>
         </section>
 
@@ -292,8 +298,11 @@
         <!-- 6: CONTACT -->
         <section class="section" id="section-6">
             <div class="contact-content">
-                <h2 class="contact-title reveal-up">LET'S<br>BUILD</h2>
-                <a href="mailto:ishaan_singh@srmap.edu.in" class="cta-button reveal-up">Get In Touch →</a>
+                <h2 class="contact-title reveal-up">
+                    <span class="mask-line"><span>LET'S</span></span>
+                    <span class="mask-line"><span>BUILD</span></span>
+                </h2>
+                <a href="mailto:ishaan_singh@srmap.edu.in" class="cta-button reveal-up magnetic">Get In Touch →</a>
                 <div class="modern-social-wrapper reveal-up">
                     <!-- Squircle Clip Path -->
                     <svg width="0" height="0" style="position: absolute;">
@@ -337,8 +346,17 @@
 
     <script>
         const cursor = document.querySelector('.cursor');
+        const cursorReveal = document.querySelector('.cursor-reveal');
         let mx = 0, my = 0, cx = 0, cy = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+        document.addEventListener('mousemove', e => { 
+            mx = e.clientX; 
+            my = e.clientY;
+            if (cursorReveal) {
+                cursorReveal.style.left = mx + 'px';
+                cursorReveal.style.top = my + 'px';
+                cursorReveal.style.opacity = 1;
+            }
+        });
         function animCursor() { cx += (mx - cx) * .12; cy += (my - cy) * .12; cursor.style.left = cx + 'px'; cursor.style.top = cy + 'px'; requestAnimationFrame(animCursor) }
         animCursor();
         document.querySelectorAll('a,button,.nav-dot,.project-card,.skill-row,.cta-button').forEach(el => {
@@ -363,7 +381,22 @@
         window.addEventListener('resize', updateNavIndicator);
 
         // Sections
-        let cur = 0; const secs = document.querySelectorAll('.section'), dots = document.querySelectorAll('.nav-dot'), pCur = document.querySelector('.progress-current'), pills = document.querySelectorAll('.nav-pill a');
+        let cur = 0; 
+        const secs = document.querySelectorAll('.section');
+        const dots = document.querySelectorAll('.nav-dot');
+        const pCur = document.querySelector('.progress-current');
+        const pills = document.querySelectorAll('.nav-pill a');
+        
+        const sectionColors = [
+            '#050505', // Home
+            '#0a0a0a', // About
+            '#1a0800', // Work (Orange Tint)
+            '#000510', // Exp (Dark Blue Tint)
+            '#000d1a', // Skills (Blueprint Blue)
+            '#080808', // Edu
+            '#100000'  // Contact (Red Tint)
+        ];
+
         function goToSection(i) {
             if (i < 0 || i >= secs.length) return;
             secs[cur].classList.remove('active'); dots[cur].classList.remove('active'); if (pills[cur]) pills[cur].classList.remove('active');
@@ -371,6 +404,10 @@
             secs[cur].scrollTop = 0;
             secs[cur].classList.add('active'); dots[cur].classList.add('active'); if (pills[cur]) pills[cur].classList.add('active');
             pCur.textContent = (cur + 1).toString().padStart(2, '0');
+            
+            // Background Morphing
+            document.body.style.backgroundColor = sectionColors[cur];
+            
             updateNavIndicator();
         }
 
@@ -388,6 +425,27 @@
             });
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'rotateY(0) rotateX(0) translateY(0)';
+            });
+        });
+
+        // Magnetic Effect
+        const magneticElements = document.querySelectorAll('.magnetic');
+        document.addEventListener('mousemove', e => {
+            magneticElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const dx = e.clientX - centerX;
+                const dy = e.clientY - centerY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < 100) {
+                    const pullX = dx * 0.3;
+                    const pullY = dy * 0.3;
+                    el.style.transform = `translate(${pullX}px, ${pullY}px)`;
+                } else {
+                    el.style.transform = 'translate(0, 0)';
+                }
             });
         });
 

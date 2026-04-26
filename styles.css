@@ -26,7 +26,8 @@ body {
     overflow-x: hidden;
     background: var(--black);
     color: var(--white);
-    font-family: 'Inter', sans-serif
+    font-family: 'Inter', sans-serif;
+    transition: background-color 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media(pointer:fine) {
@@ -49,12 +50,30 @@ body {
     mix-blend-mode: difference
 }
 
+.cursor-reveal {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 0; /* Behind content but visible via background-attachment fixed */
+    background-image: 
+        linear-gradient(rgba(255, 77, 0, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 77, 0, 0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    transform: translate(-50%, -50%);
+    mask-image: radial-gradient(circle, black 0%, transparent 70%);
+}
+
 .cursor.hover {
     transform: scale(6)
 }
 
 @media(pointer:coarse) {
-    .cursor {
+    .cursor, .cursor-reveal {
         display: none
     }
 }
@@ -316,9 +335,26 @@ header {
     visibility: visible
 }
 
-/* Reveal animation */
-.section.active .reveal-up {
-    animation: revealUp 1s cubic-bezier(.22, 1, .36, 1) forwards
+/* Reveal animation with Masking */
+.section.active .reveal-up .mask-line > span {
+    animation: revealMask 1.2s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+
+.mask-line {
+    display: block;
+    overflow: hidden;
+    line-height: 0.8; /* Ensure the mask itself is tight */
+}
+
+.mask-line > span {
+    display: inline-block;
+    transform: translateY(110%);
+}
+
+@keyframes revealMask {
+    to {
+        transform: translateY(0);
+    }
 }
 
 @keyframes revealUp {
@@ -333,12 +369,51 @@ header {
     }
 }
 
+/* Custom reveal for centered elements */
+.scroll-indicator.reveal-up {
+    animation: revealUpCentered 1.2s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+
+@keyframes revealUpCentered {
+    from {
+        transform: translate(-50%, 40px);
+        opacity: 0
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1
+    }
+}
+
+.magnetic {
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    display: inline-block;
+}
+
 /* Hero */
+#section-0 {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
 .hero-content {
     max-width: 1400px;
-    padding: 2rem 3rem 2rem;
+    padding: 0 3rem;
     width: 100%;
-    position: relative
+    position: relative;
+    z-index: 5;
+    text-align: center; /* Center all hero text */
+}
+
+.hero-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1); /* Subtle divider */
+    margin: 1.5rem 0;
 }
 
 .hero-tag {
@@ -352,11 +427,11 @@ header {
 
 .hero-title {
     font-family: 'Archivo Black', sans-serif;
-    font-size: 16vw;
-    line-height: .85;
+    font-size: 14vw; /* Slightly reduced for exact fit */
+    line-height: .8;
     letter-spacing: -.04em;
     text-transform: uppercase;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: #fff;
     transition: all 0.3s;
 }
@@ -364,19 +439,20 @@ header {
 .hero-title-outline {
     -webkit-text-stroke: 2px #fff;
     -webkit-text-fill-color: transparent;
-    font-style: italic
+    font-style: italic;
 }
 
-.hero-title:hover, .contact-title:hover {
+.hero-title-solid:hover {
     animation: textGlitch 0.2s linear infinite;
+    display: inline-block;
 }
 
 @keyframes textGlitch {
-    0% { text-shadow: 4px 0 0 rgba(255,0,0,0.8), -4px 0 0 rgba(0,0,255,0.8); }
-    25% { text-shadow: -4px 0 0 rgba(255,0,0,0.8), 4px 0 0 rgba(0,0,255,0.8); transform: translate(2px, 0); }
-    50% { text-shadow: 4px 0 0 rgba(255,0,0,0.8), -4px 0 0 rgba(0,0,255,0.8); transform: translate(-2px, 0); }
-    75% { text-shadow: -4px 0 0 rgba(255,0,0,0.8), 4px 0 0 rgba(0,0,255,0.8); transform: translate(0, 2px); }
-    100% { text-shadow: 4px 0 0 rgba(255,0,0,0.8), -4px 0 0 rgba(0,0,255,0.8); transform: translate(0, -2px); }
+    0% { text-shadow: 1px 0 0 rgba(255, 255, 255, 0.3), -1px 0 0 rgba(255, 77, 0, 0.3); }
+    25% { text-shadow: -1px 0 0 rgba(255, 255, 255, 0.3), 1px 0 0 rgba(255, 77, 0, 0.3); transform: translate(0.5px, 0); }
+    50% { text-shadow: 1px 0 0 rgba(255, 255, 255, 0.3), -1px 0 0 rgba(255, 77, 0, 0.3); transform: translate(-0.5px, 0); }
+    75% { text-shadow: -1px 0 0 rgba(255, 255, 255, 0.3), 1px 0 0 rgba(255, 77, 0, 0.3); transform: translate(0, 0.5px); }
+    100% { text-shadow: 1px 0 0 rgba(255, 255, 255, 0.3), -1px 0 0 rgba(255, 77, 0, 0.3); transform: translate(0, -0.5px); }
 }
 
 .hero-divider {
@@ -390,7 +466,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0
+    padding: 0 0;
+    margin-top: 1rem;
 }
 
 .hero-meta-item {
@@ -422,10 +499,19 @@ header {
 }
 
 /* Rotating Scroll Indicator */
+.scroll-indicator-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
 .scroll-indicator {
-    width: 144px;
-    height: 144px;
-    position: relative
+    width: 120px;
+    height: 120px;
+    position: relative;
+    z-index: 100;
+    pointer-events: none;
 }
 
 .scroll-indicator svg {
@@ -467,6 +553,11 @@ header {
     padding: 1rem 3rem;
     width: 100%;
     align-items: center
+}
+
+
+.about-left h2 span {
+    color: var(--orange)
 }
 
 .about-left h2 {
@@ -880,22 +971,36 @@ header {
 }
 
 /* Contact - Giant CTA */
+#section-6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+}
+
 .contact-content {
     text-align: center;
-    max-width: 1400px;
-    padding: 2rem 3rem;
-    width: 100%
+    max-width: 1000px;
+    width: 100%;
 }
 
 .contact-title {
     font-family: 'Archivo Black', sans-serif;
-    font-size: 12vw;
-    line-height: .85;
-    text-transform: uppercase;
+    font-size: 13vw; /* Slightly reduced for better vertical fit */
+    line-height: .75;
     letter-spacing: -.04em;
+    text-transform: uppercase;
     margin-bottom: 2rem;
     color: #fff;
-    transition: all .3s
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-title .mask-line {
+    margin: -1vw 0; /* Tight but safe */
 }
 
 .cta-button {
@@ -924,7 +1029,7 @@ header {
 }
 
 .modern-social-wrapper {
-    margin: 3rem 0;
+    margin-top: 4rem;
     display: flex;
     justify-content: center;
 }
