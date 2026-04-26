@@ -332,7 +332,7 @@ header {
     visibility: hidden;
     transition: all .8s cubic-bezier(.22, 1, .36, 1);
     overflow-y: auto;
-    padding: 6rem 0 5rem;
+    padding: 8rem 2rem 6rem;
     background: linear-gradient(180deg, transparent 0%, rgba(255, 77, 0, 0.02) 50%, transparent 100%);
 }
 
@@ -481,17 +481,18 @@ header {
 
 .hero-divider {
     width: 100%;
-    height: 2px;
-    background: #000;
-    margin: 2rem 0
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 2.5rem 0;
 }
 
 .hero-meta {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 0;
+    align-items: flex-start;
+    padding: 1.5rem 0;
     margin-top: 1rem;
+    gap: 2rem;
 }
 
 .hero-meta-item {
@@ -511,15 +512,21 @@ header {
 .hero-availability {
     display: inline-block;
     margin-top: 1rem;
-    padding: .4rem 1.2rem;
+    padding: .6rem 1.8rem;
     border: 2px solid var(--orange);
-    border-radius: 0;
+    border-radius: 12px;
     color: var(--orange);
     font-family: 'Space Mono', monospace;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: .15em;
-    text-transform: uppercase
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hero-availability:hover {
+    background: var(--orange);
+    color: #000;
 }
 
 /* Rotating Scroll Indicator */
@@ -588,10 +595,10 @@ header {
 .about-left h2 {
     font-family: 'Archivo Black', sans-serif;
     font-size: 4.5vw;
-    line-height: .9;
+    line-height: .95;
     letter-spacing: -.04em;
     text-transform: uppercase;
-    margin-bottom: 1rem
+    margin-bottom: 2rem;
 }
 
 .about-left h2 span {
@@ -600,10 +607,10 @@ header {
 
 .about-text {
     font-size: 1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, .7);
-    margin-bottom: 1rem;
-    font-weight: 300
+    line-height: 1.8;
+    color: rgba(255, 255, 255, .75);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
 }
 
 .stats-row {
@@ -616,10 +623,10 @@ header {
 
 .stat-value {
     font-family: 'Archivo Black', sans-serif;
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--orange);
     line-height: 1;
-    margin-bottom: .3rem
+    margin-bottom: .5rem;
 }
 
 .stat-label {
@@ -627,16 +634,16 @@ header {
     font-size: 9px;
     letter-spacing: .3em;
     color: var(--muted);
-    text-transform: uppercase
+    text-transform: uppercase;
 }
 
 .about-image {
     aspect-ratio: 4/5;
     max-height: 60vh;
-    border-radius: 2px;
+    border-radius: 12px;
     overflow: hidden;
     position: relative;
-    border: 2px solid rgba(255, 255, 255, .05)
+    border: 1px solid rgba(255, 255, 255, .1);
 }
 
 .about-image-inner {
@@ -706,7 +713,7 @@ header {
 /* Projects */
 .projects-content {
     max-width: 1400px;
-    padding: 2rem 3rem;
+    padding: 3rem 3rem;
     width: 100%;
     margin: 0 auto;
 }
@@ -725,7 +732,7 @@ header {
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem
+    gap: 2rem;
 }
 
 .project-card {
@@ -741,6 +748,7 @@ header {
     perspective: 1000px;
     transform-style: preserve-3d;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
 .project-blueprint {
@@ -823,7 +831,7 @@ header {
 /* Skills - Brutalist List */
 .skills-content {
     max-width: 1400px;
-    padding: 2rem 3rem;
+    padding: 3rem 3rem;
     width: 100%;
     margin: 0 auto;
 }
@@ -831,10 +839,10 @@ header {
 .skill-row {
     display: flex;
     align-items: center;
-    padding: 2.5rem 2rem;
+    padding: 3rem 2.5rem;
     border-top: 1px solid rgba(255, 255, 255, .08);
     transition: all .4s cubic-bezier(.23, 1, .32, 1);
-    gap: 2rem;
+    gap: 2.5rem;
     position: relative;
     border-radius: 8px;
     margin: 0.5rem 0;
@@ -872,8 +880,8 @@ header {
     font-family: 'Space Mono', monospace;
     font-size: 14px;
     color: var(--orange);
-    min-width: 3rem;
-    font-weight: 700
+    min-width: 3.5rem;
+    font-weight: 700;
 }
 
 .skill-row-title {
@@ -954,7 +962,7 @@ header {
 /* Education */
 .education-content {
     max-width: 1400px;
-    padding: 2rem 3rem;
+    padding: 3rem 3rem;
     width: 100%;
     margin: 0 auto;
     display: flex;
