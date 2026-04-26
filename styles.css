@@ -247,26 +247,26 @@ header {
     top: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     border-radius: 9999px;
-    padding: .6rem;
+    padding: .7rem;
     display: flex;
     gap: .3rem;
     z-index: 1001;
-    border: 1.5px solid rgba(255, 77, 0, 0.3);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 77, 0, 0.4);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .nav-indicator {
     position: absolute;
-    height: calc(100% - 1.2rem);
+    height: calc(100% - 1.4rem);
     background: linear-gradient(135deg, var(--orange), rgba(255, 77, 0, 0.7));
     border-radius: 9999px;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     z-index: -1;
-    box-shadow: 0 5px 20px rgba(255, 77, 0, 0.4);
+    box-shadow: 0 8px 25px rgba(255, 77, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .nav-pill a {
@@ -482,7 +482,7 @@ header {
 .hero-divider {
     width: 100%;
     height: 1px;
-    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     margin: 2.5rem 0;
 }
 
@@ -644,6 +644,8 @@ header {
     overflow: hidden;
     position: relative;
     border: 1px solid rgba(255, 255, 255, .1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .about-image-inner {
@@ -751,7 +753,7 @@ header {
     transition: all .6s cubic-bezier(.23, 1, .32, 1);
     perspective: 1000px;
     transform-style: preserve-3d;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     cursor: pointer;
 }
 
@@ -773,9 +775,9 @@ header {
 
 .project-card:hover {
     border-color: var(--orange);
-    box-shadow: 0 30px 80px rgba(255, 77, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.6);
-    transform: translateY(-8px);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 77, 0, 0.04) 100%);
+    box-shadow: 0 40px 100px rgba(255, 77, 0, 0.25), 0 15px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-10px) scale(1.01);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 77, 0, 0.05) 100%);
 }
 
 .project-info {
@@ -849,13 +851,16 @@ header {
     transition: all .4s cubic-bezier(.23, 1, .32, 1);
     gap: 2.5rem;
     position: relative;
-    border-radius: 8px;
+    border-radius: 12px;
     margin: 0.5rem 0;
+    cursor: pointer;
 }
 
 .skill-row:hover {
-    background: rgba(255, 77, 0, 0.04);
-    border-color: rgba(255, 77, 0, 0.3);
+    background: rgba(255, 77, 0, 0.06);
+    border-color: rgba(255, 77, 0, 0.4);
+    padding-left: 3rem;
+    box-shadow: inset 0 1px 0 rgba(255, 77, 0, 0.2);
 }
 
 .skill-gear {
@@ -906,7 +911,7 @@ header {
 }
 
 .skill-pill {
-    padding: .4rem 1rem;
+    padding: .5rem 1.1rem;
     border: 1px solid rgba(255, 255, 255, .15);
     border-radius: 9999px;
     font-family: 'Space Mono', monospace;
@@ -914,9 +919,19 @@ header {
     letter-spacing: .05em;
     text-transform: uppercase;
     color: var(--muted);
-    transition: all .3s;
-    background: rgba(255, 255, 255, 0.02);
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1);
+    background: rgba(255, 255, 255, 0.03);
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+
+.skill-pill:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    background: rgba(255, 77, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(255, 77, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 .skill-row:hover .skill-pill {
@@ -985,13 +1000,13 @@ header {
     background: linear-gradient(135deg, rgba(255, 77, 0, 0.05) 0%, rgba(30, 58, 138, 0.02) 100%);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .education-card:hover {
     border-color: var(--orange);
-    box-shadow: 0 20px 60px rgba(255, 77, 0, 0.15), 0 10px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 70px rgba(255, 77, 0, 0.15), 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     transform: translateY(-4px);
     background: linear-gradient(135deg, rgba(255, 77, 0, 0.08) 0%, rgba(30, 58, 138, 0.03) 100%);
 }
@@ -1078,7 +1093,7 @@ header {
     display: inline-flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.4rem 3.5rem;
+    padding: 1.5rem 3.8rem;
     background: linear-gradient(135deg, var(--orange), rgba(255, 77, 0, 0.8));
     color: #fff;
     border: 2px solid var(--orange);
@@ -1088,10 +1103,11 @@ header {
     letter-spacing: .15em;
     text-transform: uppercase;
     text-decoration: none;
-    box-shadow: 0 15px 50px rgba(255, 77, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(255, 77, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     transition: all .4s cubic-bezier(.23, 1, .32, 1);
     position: relative;
     overflow: hidden;
+    font-weight: 600;
 }
 
 .cta-button::before {
@@ -1101,8 +1117,8 @@ header {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    background: rgba(255, 255, 255, 0.15);
+    transition: left 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     z-index: 0;
 }
 
@@ -1111,10 +1127,15 @@ header {
 }
 
 .cta-button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 25px 80px rgba(255, 77, 0, 0.4), 0 5px 20px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(135deg, rgba(255, 77, 0, 0.95), var(--orange));
+    transform: translateY(-6px);
+    box-shadow: 0 30px 90px rgba(255, 77, 0, 0.35), 0 10px 30px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, rgba(255, 77, 0, 0.98), var(--orange));
     border-color: #fff;
+}
+
+.cta-button:active {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(255, 77, 0, 0.2);
 }
 
 .modern-social-wrapper {
